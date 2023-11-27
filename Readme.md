@@ -16,17 +16,17 @@ This is the backend for Tezeract online assessment project.
    npm run dev
    ```
 
-Create a .env file in the root directory and add the necessary environment variables:
-
 # ENV variables
+
+Create a .env file in the root directory and add the necessary environment variables:
 
 PORT=3000
 
 db=tezeract
 
-username=<dbUserName>
+username=dbUserName
 
-password=<dbPassword>
+password=dbPassword
 
 host=localhost
 
