@@ -79,64 +79,24 @@ exports.getTopEarners = async function (req, res) {
 
 exports.calculateRetentionRateByPosition = async function (req, res) {
   try {
-    const { startDate, endDate } = req.query;
+    const { noEmpEndPeriod,noEmpLeft, position } = req.query;
 
-    // Find distinct positions
-    const distinctPositions = await Employee.findAll({
-      attributes: [
-        [sequelize.fn("DISTINCT", sequelize.col("position")), "position"],
-      ],
+    const noEmpStart = await Employee.count({
+      where: {
+        position: position,
+      },
     });
 
-    const retentionRatesByPosition = [];
+    const retentionRate = ((noEmpEndPeriod - noEmpLeft) / noEmpStart) * 100;
 
-    for (const position of distinctPositions) {
-      const positionName = position.dataValues.position;
-
-      // Calculate the number of employees at the start of the period for the current position
-      const startEmployeesCount = await Employee.count({
-        where: {
-          joiningDate: {
-            [Op.lte]: startDate,
-          },
-          position: positionName,
-        },
-      });
-
-      // Calculate the number of employees at the end of the period for the current position
-      const endEmployeesCount = await Employee.count({
-        where: {
-          joiningDate: {
-            [Op.lte]: endDate,
-          },
-          position: positionName,
-        },
-      });
-
-      // Calculate the number of employees who left during the period for the current position
-      const leftEmployeesCount = await Employee.count({
-        where: {
-          joiningDate: {
-            [Op.between]: [startDate, endDate],
-          },
-          position: positionName,
-        },
-      });
-
-      // Calculate the retention rate for the current position
-      const retentionRate =
-        ((endEmployeesCount - leftEmployeesCount) / startEmployeesCount) * 100;
-
-      retentionRatesByPosition.push({
-        position: positionName,
-        retentionRate,
-      });
+    const result={
+        retentionRate:retentionRate+"%",
+        position:position
     }
-
     return res.json({
       success: true,
       message: "Executed Successfully",
-      data: retentionRatesByPosition,
+      data: result,
     });
   } catch (e) {
     return res.json({
@@ -156,7 +116,7 @@ exports.filterEmployeesBySalaryRange = async function (req, res) {
           [Op.between]: [minSalary, maxSalary],
         },
       },
-      attributes: ["id", "name", "position", "salary", "joiningDate"]
+      attributes: ["id", "name", "position", "salary", "joiningDate"],
     });
 
     return res.json({

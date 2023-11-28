@@ -50,7 +50,7 @@ GET /employee/filterByExperience: Filter employees by experience level.
 
 GET /employee/topEarners: Get the top earners in the company.
 
-GET /employee/retentionRateByDepartment: Calculate employee retention rate by department.
+GET /employee/retentionRateByPosition: Calculate employee retention rate by position.
 
 GET /employee/filterBySalaryRange: Filter employees by salary
 

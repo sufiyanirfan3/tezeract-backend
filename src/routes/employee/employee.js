@@ -9,7 +9,7 @@ route.get(
 );
 route.get("/topEarners", employeeController.getTopEarners);
 route.get(
-  "/retentionRateByDepartment",
+  "/retentionRateByPosition",
   employeeController.calculateRetentionRateByPosition
 );
 route.get(

@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "af04730e-f881-4ef0-84f0-5b135d00f9f8",
+		"name": "Tezeract-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21083111"
+	},
+	"item": [
+		{
+			"name": "Employee Avg Salary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/avgSalary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"avgSalary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Filter By Experience",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/filterByExperience?minExperience=3&maxExperience=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"filterByExperience"
+					],
+					"query": [
+						{
+							"key": "minExperience",
+							"value": "3"
+						},
+						{
+							"key": "maxExperience",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Top Earners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/topEarners?topN=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"topEarners"
+					],
+					"query": [
+						{
+							"key": "topN",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Filter By Salary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/filterBySalaryRange?minSalary=80000&maxSalary=90000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"filterBySalaryRange"
+					],
+					"query": [
+						{
+							"key": "minSalary",
+							"value": "80000"
+						},
+						{
+							"key": "maxSalary",
+							"value": "90000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Retention Rate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/filterBySalaryRange?minSalary=100000&maxSalary=110000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"filterBySalaryRange"
+					],
+					"query": [
+						{
+							"key": "minSalary",
+							"value": "100000"
+						},
+						{
+							"key": "maxSalary",
+							"value": "110000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
