@@ -29,6 +29,20 @@ exports.filterEmployeesByExperience = async function (req, res) {
   try {
     const { minExperience, maxExperience } = req.query;
 
+    if (minExperience < 0 || maxExperience < 0) {
+      return res.json({
+        success: false,
+        message: "Employee experience cannot be less than zero",
+      });
+    }
+
+    if (minExperience >= maxExperience) {
+      return res.json({
+        success: false,
+        message: "Min Experience should be less than Max Experience",
+      });
+    }
+
     const employees = await Employee.findAll({
       where: {
         joiningDate: {
@@ -58,6 +72,13 @@ exports.getTopEarners = async function (req, res) {
   try {
     const { topN } = req.query;
 
+    if (!topN || topN <= 0) {
+      return res.json({
+        success: false,
+        message: "Provide the topN limit value",
+      });
+    }
+
     const topEarners = await Employee.findAll({
       order: [["salary", "DESC"]],
       limit: parseInt(topN),
@@ -79,7 +100,7 @@ exports.getTopEarners = async function (req, res) {
 
 exports.calculateRetentionRateByPosition = async function (req, res) {
   try {
-    const { noEmpEndPeriod,noEmpLeft, position } = req.query;
+    const { noEmpEndPeriod, noEmpLeft, position } = req.query;
 
     const noEmpStart = await Employee.count({
       where: {
@@ -89,10 +110,10 @@ exports.calculateRetentionRateByPosition = async function (req, res) {
 
     const retentionRate = ((noEmpEndPeriod - noEmpLeft) / noEmpStart) * 100;
 
-    const result={
-        retentionRate:retentionRate+"%",
-        position:position
-    }
+    const result = {
+      retentionRate: retentionRate + "%",
+      position: position,
+    };
     return res.json({
       success: true,
       message: "Executed Successfully",
@@ -109,6 +130,20 @@ exports.calculateRetentionRateByPosition = async function (req, res) {
 exports.filterEmployeesBySalaryRange = async function (req, res) {
   try {
     const { minSalary, maxSalary } = req.query;
+
+    if (minSalary < 0 || maxSalary < 0) {
+      return res.json({
+        success: false,
+        message: "Employee salary cannot be less than zero",
+      });
+    }
+
+    if (minSalary >= maxSalary) {
+      return res.json({
+        success: false,
+        message: "Min Salary should be less than Max Salary",
+      });
+    }
 
     const employees = await Employee.findAll({
       where: {
