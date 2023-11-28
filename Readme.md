@@ -69,6 +69,7 @@ MySQL2: MySQL library for Node.js.
 Nodemon: Development utility for automatically restarting the server.
 
 # Database File
+
 The database .sql file is also present in the repo.
 
 # Scripts
